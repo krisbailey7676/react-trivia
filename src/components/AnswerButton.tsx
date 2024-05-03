@@ -26,12 +26,12 @@ function AnswerButton({
     setBgColor("purple");
   }, [questionIndex]);
 
-  const handleClick = (evt) => {
+  const handleClick = () => {
     let selectedBreedName = "";
     let correctBreedName = "";
     let isCorrect = true;
 
-    selectedBreedName = evt.target.innerText;
+    selectedBreedName = option;
     correctBreedName = correctAnswer;
 
     selectedBreedName === correctBreedName

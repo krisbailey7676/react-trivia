@@ -1,11 +1,17 @@
 import "../styles/QuestionCard.css";
-import { breedDataObj } from "../data/gameData.js";
+// import { breedDataObj } from "../data/gameData.js";
 import { useState } from "react";
 import AnswerButtonGroup from "./AnswerButtonGroup.jsx";
 import NextButton from "./NextButton.js";
 import PreviousButton from "./PreviousButton.js";
 import ResetButton from "./ResetButton.js";
 import { breedNameArr } from "../data/nameData.js";
+import { breedImageArr } from "../data/imageData.js";
+import {
+  wrongAnswersA,
+  wrongAnswersB,
+  wrongAnswersC,
+} from "../data/answerData.js";
 
 function QuestionCard() {
   const [questionIndex, setquestionIndex] = useState(0);
@@ -13,6 +19,19 @@ function QuestionCard() {
 
   const firstQuestion = questionIndex === 0;
   const lastQuestion = questionIndex === breedNameArr.length - 1;
+
+  const options = [
+    wrongAnswersA[questionIndex], // wrongAnswersA is an array of incorrect answers
+    wrongAnswersB[questionIndex], // wrongAnswersB is another array of incorrect answers
+    wrongAnswersC[questionIndex], // wrongAnswersC is another array of incorrect answers
+    breedNameArr[questionIndex], // breedNameArr contains the correct answers
+  ];
+
+  const questionData = {
+    correctAnswer: breedNameArr[questionIndex],
+    img: breedImageArr[questionIndex],
+    options: options,
+  };
 
   const incrementQuestionIndex = () => {
     setquestionIndex(questionIndex + 1);
@@ -37,8 +56,8 @@ function QuestionCard() {
         <div className="card-body">
           <img
             className="card-image"
-            src={breedDataObj[questionIndex].imagePath}
-            alt="image"
+            src={questionData.img}
+            alt={`Picture of ${questionData.correctAnswer}`}
           />
           <div className="text-center" id="ntbTextSection">
             <p className="card-text">
@@ -48,6 +67,8 @@ function QuestionCard() {
           <div id="answerButtonSection">
             <div style={{ visibility: "visible" }}>
               <AnswerButtonGroup
+                options={questionData.options}
+                correctAnswer={questionData.correctAnswer}
                 updateScore={() => updateScore()} // callback passed to AnswerButtonGroup then to AnswerButton
                 questionIndex={questionIndex}
               />
@@ -65,11 +86,11 @@ function QuestionCard() {
               />
             </div>
             <div id="midCol" className="d-flex flex-column">
-              <span>Question #{breedDataObj[questionIndex].questionId}</span>
+              <span>Question #{questionIndex + 1}</span>
               <div id="score">🐶Score {score}/20🐶</div>
             </div>
             <div className="d-flex flex-column">
-              {questionIndex !== breedDataObj.length - 1 ? (
+              {!lastQuestion ? (
                 <NextButton
                   disabled={lastQuestion}
                   onClick={() => incrementQuestionIndex()}

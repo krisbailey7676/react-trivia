@@ -5,11 +5,14 @@ import AnswerButtonGroup from "./AnswerButtonGroup.jsx";
 import NextButton from "./NextButton.js";
 import PreviousButton from "./PreviousButton.js";
 import ResetButton from "./ResetButton.js";
+import { breedNameArr } from "../data/nameData.js";
 
 function QuestionCard() {
   const [questionIndex, setquestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const lastQuestion = questionIndex === breedDataObj.length - 1;
+
+  const firstQuestion = questionIndex === 0;
+  const lastQuestion = questionIndex === breedNameArr.length - 1;
 
   const incrementQuestionIndex = () => {
     setquestionIndex(questionIndex + 1);
@@ -57,7 +60,7 @@ function QuestionCard() {
           >
             <div className="d-flex flex-column">
               <PreviousButton
-                disabled={questionIndex === 0 || lastQuestion}
+                disabled={firstQuestion || lastQuestion}
                 onClick={() => decrementQuestionIndex()}
               />
             </div>

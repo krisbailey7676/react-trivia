@@ -3,7 +3,7 @@ import QuestionCard from "./components/QuestionCard";
 
 function App() {
   return (
-    <div>
+    <div className="d-flex justify-content-center">
       <QuestionCard />
     </div>
   );

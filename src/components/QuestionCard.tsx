@@ -78,58 +78,56 @@ function QuestionCard() {
   };
 
   return (
-    <div className="d-flex justify-content-center">
-      <div className="card">
-        <div className="card-body">
-          <img
-            className="card-image"
-            src={questionData.img}
-            alt={`Picture of ${questionData.correctAnswer}`}
-          />
-          <div className="text-center" id="ntbTextSection">
-            <p className="card-text">
-              What is the name of the dog breed pictured above?
-            </p>
+    <div className="card">
+      <div className="card-body">
+        <img
+          className="card-image"
+          src={questionData.img}
+          alt={`Picture of ${questionData.correctAnswer}`}
+        />
+        <div className="text-center" id="ntbTextSection">
+          <p className="card-text">
+            What is the name of the dog breed pictured above?
+          </p>
+        </div>
+        <div id="answerButtonSection">
+          <div style={{ visibility: "visible" }}>
+            <AnswerButtonGroup
+              options={questionData.options}
+              correctAnswer={questionData.correctAnswer}
+              onAnswerClick={onAnswerClick}
+              isAnswered={isAnswered}
+              questionIndex={questionIndex}
+            />
           </div>
-          <div id="answerButtonSection">
-            <div style={{ visibility: "visible" }}>
-              <AnswerButtonGroup
-                options={questionData.options}
-                correctAnswer={questionData.correctAnswer}
-                onAnswerClick={onAnswerClick}
-                isAnswered={isAnswered}
-                questionIndex={questionIndex}
-              />
-            </div>
-          </div>
+        </div>
 
-          <div
-            className="d-flex justify-content-between flex-row align-items-center"
-            id="navSection"
-          >
-            <div className="d-flex flex-column">
-              <PreviousButton
-                disabled={firstQuestion || lastQuestion}
-                onClick={() => decrementQuestionIndex()}
+        <div
+          className="d-flex justify-content-between flex-row align-items-center"
+          id="navSection"
+        >
+          <div className="d-flex flex-column">
+            <PreviousButton
+              disabled={firstQuestion || lastQuestion}
+              onClick={() => decrementQuestionIndex()}
+            />
+          </div>
+          <div id="midCol" className="d-flex flex-column">
+            <span>Question #{questionIndex + 1}</span>
+            <div id="score">🐶Score {score}/20🐶</div>
+          </div>
+          <div className="d-flex flex-column">
+            {!lastQuestion ? (
+              <NextButton
+                disabled={lastQuestion}
+                onClick={() => incrementQuestionIndex()}
               />
-            </div>
-            <div id="midCol" className="d-flex flex-column">
-              <span>Question #{questionIndex + 1}</span>
-              <div id="score">🐶Score {score}/20🐶</div>
-            </div>
-            <div className="d-flex flex-column">
-              {!lastQuestion ? (
-                <NextButton
-                  disabled={lastQuestion}
-                  onClick={() => incrementQuestionIndex()}
-                />
-              ) : (
-                <ResetButton
-                  disabled={!lastQuestion}
-                  onClick={() => resetQuestionIndex()}
-                />
-              )}
-            </div>
+            ) : (
+              <ResetButton
+                disabled={!lastQuestion}
+                onClick={() => resetQuestionIndex()}
+              />
+            )}
           </div>
         </div>
       </div>

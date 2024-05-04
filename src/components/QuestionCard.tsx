@@ -16,6 +16,9 @@ function QuestionCard() {
   const [questionIndex, setquestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [randomAnswerIndex, setRandomAnswerIndex] = useState(
+    Math.floor(Math.random() * 4)
+  );
 
   useEffect(() => {
     setIsAnswered(false);
@@ -31,10 +34,27 @@ function QuestionCard() {
     breedNameArr[questionIndex], // breedNameArr contains the correct answers
   ];
 
+  function shuffleOptions(options: string[]) {
+    console.log("Called shuffled options");
+    console.log("Random Index: " + randomAnswerIndex);
+    console.log("Question Index: " + questionIndex);
+    const shuffled = [];
+    let position = 0;
+
+    for (let i = 0; i < options.length; i++) {
+      position = (randomAnswerIndex + i) % options.length;
+      shuffled.push(options[position]);
+    }
+
+    return shuffled;
+  }
+
+  const shuffledOptions = shuffleOptions(options);
+
   const questionData = {
     correctAnswer: breedNameArr[questionIndex],
     img: breedImageArr[questionIndex],
-    options: options,
+    options: shuffledOptions,
   };
 
   const correctAnswerIndex = questionData.options.indexOf(
@@ -47,6 +67,7 @@ function QuestionCard() {
 
   const incrementQuestionIndex = () => {
     setquestionIndex(questionIndex + 1);
+    setRandomAnswerIndex(Math.floor(Math.random() * 4)); // only change random index when questionIndex is incremented
   };
 
   const decrementQuestionIndex = () => {

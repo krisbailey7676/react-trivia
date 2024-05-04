@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 
 interface Props {
   correctAnswer: string;
-  onAnswerClick: () => void;
+  onAnswerClick: (isCorrect: boolean) => void;
   isAnswered: boolean;
-  updateScore: () => void;
   questionIndex: number;
   answer: string;
 }
@@ -14,7 +13,6 @@ function AnswerButton({
   correctAnswer,
   onAnswerClick,
   isAnswered,
-  updateScore,
   questionIndex,
   answer,
 }: Props) {
@@ -30,17 +28,10 @@ function AnswerButton({
   // const bgColor = isAnswered ? (correct ? "green" : "red") : "purple";
 
   const handleClick = () => {
-    // only call updateScore if the answer is correct
-    if (correct) {
-      updateScore(); // triggers updateScore func in grandparent
-    }
-
     // change background color according to correct/incorrect answer
     setBgColor(correct ? "green" : "red");
 
-    // question is answered when any AnswerButton is clicked
-    // triggers onAnswered func in parent
-    onAnswerClick();
+    onAnswerClick(correct);
   };
 
   return (

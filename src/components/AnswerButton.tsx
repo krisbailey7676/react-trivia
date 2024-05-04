@@ -25,12 +25,9 @@ function AnswerButton({
   }, [questionIndex]);
 
   const correct = answer === correctAnswer;
-  // const bgColor = isAnswered ? (correct ? "green" : "red") : "purple";
 
   const handleClick = () => {
-    // change background color according to correct/incorrect answer
-    setBgColor(correct ? "green" : "red");
-
+    setBgColor(correct ? "green" : "red"); // change background color of selected button based on correct/incorrect answer
     onAnswerClick(correct);
   };
 

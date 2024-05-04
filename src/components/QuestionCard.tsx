@@ -1,6 +1,5 @@
 import "../styles/QuestionCard.css";
-// import { breedDataObj } from "../data/gameData.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AnswerButtonGroup from "./AnswerButtonGroup.jsx";
 import NextButton from "./NextButton.js";
 import PreviousButton from "./PreviousButton.js";
@@ -16,6 +15,11 @@ import {
 function QuestionCard() {
   const [questionIndex, setquestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [isAnswered, setIsAnswered] = useState(false);
+
+  useEffect(() => {
+    setIsAnswered(false);
+  }, [questionIndex]);
 
   const firstQuestion = questionIndex === 0;
   const lastQuestion = questionIndex === breedNameArr.length - 1;
@@ -31,6 +35,14 @@ function QuestionCard() {
     correctAnswer: breedNameArr[questionIndex],
     img: breedImageArr[questionIndex],
     options: options,
+  };
+
+  const correctAnswerIndex = questionData.options.indexOf(
+    questionData.correctAnswer
+  );
+
+  const onAnswer = () => {
+    setIsAnswered(true);
   };
 
   const incrementQuestionIndex = () => {
@@ -68,7 +80,9 @@ function QuestionCard() {
             <div style={{ visibility: "visible" }}>
               <AnswerButtonGroup
                 options={questionData.options}
-                correctAnswer={questionData.correctAnswer}
+                correctAnswerIndex={correctAnswerIndex}
+                onAnswerClick={onAnswer}
+                isAnswered={isAnswered}
                 updateScore={() => updateScore()} // callback passed to AnswerButtonGroup then to AnswerButton
                 questionIndex={questionIndex}
               />

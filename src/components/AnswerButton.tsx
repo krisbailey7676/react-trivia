@@ -2,21 +2,23 @@ import "../styles/AnswerButton.css";
 import { useState, useEffect } from "react";
 
 interface Props {
+  onAnswerClick: () => void;
   updateScore: () => void;
-  disabled: boolean;
+  isAnswered: boolean;
   questionIndex: number;
-  answered: () => void;
-  option: string;
-  correctAnswer: string;
+  answerIndex: number;
+  answer: string;
+  correctAnswerIndex: number;
 }
 
 function AnswerButton({
+  onAnswerClick,
   updateScore,
-  disabled,
+  isAnswered,
   questionIndex,
-  answered,
-  option,
-  correctAnswer,
+  answerIndex,
+  answer,
+  correctAnswerIndex,
 }: Props) {
   const [bgColor, setBgColor] = useState("purple");
 
@@ -26,44 +28,36 @@ function AnswerButton({
     setBgColor("purple");
   }, [questionIndex]);
 
+  const correct = answerIndex === correctAnswerIndex;
+  // const bgColor = isAnswered ? (correct ? "green" : "red") : "purple";
+
   const handleClick = () => {
-    let selectedBreedName = "";
-    let correctBreedName = "";
-    let isCorrect = true;
-
-    selectedBreedName = option;
-    correctBreedName = correctAnswer;
-
-    selectedBreedName === correctBreedName
-      ? (isCorrect = true)
-      : (isCorrect = false);
-
     // only call updateScore if the answer is correct
-    if (isCorrect) {
+    if (correct) {
       updateScore(); // triggers updateScore func in grandparent
     }
 
     // change background color according to correct/incorrect answer
-    setBgColor(isCorrect ? "green" : "red");
+    setBgColor(correct ? "green" : "red");
 
     // question is answered when any AnswerButton is clicked
     // triggers onAnswered func in parent
-    answered();
+    onAnswerClick();
   };
 
   return (
     <>
       <button
         className="answerButton"
-        disabled={disabled}
+        disabled={isAnswered}
         style={
-          disabled
+          isAnswered
             ? { backgroundColor: bgColor, opacity: 0.7 }
             : { backgroundColor: bgColor }
         }
-        onClick={handleClick}
+        onClick={() => handleClick()}
       >
-        {option}
+        {answer}
       </button>
     </>
   );

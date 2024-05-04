@@ -1,5 +1,5 @@
 import "../styles/QuestionCard.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AnswerButtonGroup from "./AnswerButtonGroup.jsx";
 import NextButton from "./NextButton.js";
 import PreviousButton from "./PreviousButton.js";
@@ -19,10 +19,6 @@ function QuestionCard() {
   const [randomAnswerIndex, setRandomAnswerIndex] = useState(
     Math.floor(Math.random() * 4)
   );
-
-  useEffect(() => {
-    setIsAnswered(false);
-  }, [questionIndex]);
 
   const firstQuestion = questionIndex === 0;
   const lastQuestion = questionIndex === breedNameArr.length - 1;
@@ -68,6 +64,7 @@ function QuestionCard() {
   const incrementQuestionIndex = () => {
     setquestionIndex(questionIndex + 1);
     setRandomAnswerIndex(Math.floor(Math.random() * 4)); // only change random index when questionIndex is incremented
+    setIsAnswered(false);
   };
 
   const decrementQuestionIndex = () => {

@@ -3,20 +3,22 @@ import AnswerButton from "./AnswerButton";
 
 interface Props {
   options: string[];
+  // correctAnswerIndex: number;
+  correctAnswer: string;
   onAnswerClick: () => void;
   isAnswered: boolean;
-  correctAnswerIndex: number;
   updateScore: () => void;
   questionIndex: number;
 }
 
 function AnswerButtonGroup({
   options,
+  // correctAnswerIndex,
+  correctAnswer,
   onAnswerClick,
   isAnswered,
-  correctAnswerIndex,
-  questionIndex,
   updateScore,
+  questionIndex,
 }: Props) {
   const buttons = [];
 
@@ -24,13 +26,12 @@ function AnswerButtonGroup({
     buttons.push(
       <AnswerButton
         key={i}
-        correctAnswerIndex={correctAnswerIndex}
-        updateScore={() => updateScore()}
+        correctAnswer={correctAnswer}
+        onAnswerClick={onAnswerClick}
         isAnswered={isAnswered}
-        onAnswerClick={onAnswerClick} // callback passed to AnswerButton
+        updateScore={() => updateScore()}
         questionIndex={questionIndex}
         answer={options[i]}
-        answerIndex={i}
       />
     );
   }

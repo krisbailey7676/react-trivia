@@ -52,11 +52,11 @@ function QuestionCard() {
     options: shuffledOptions,
   };
 
-  const correctAnswerIndex = questionData.options.indexOf(
-    questionData.correctAnswer
-  );
+  // const correctAnswerIndex = questionData.options.indexOf(
+  //   questionData.correctAnswer
+  // );
 
-  const onAnswer = () => {
+  const onAnswerClick = () => {
     setIsAnswered(true);
   };
 
@@ -98,8 +98,9 @@ function QuestionCard() {
             <div style={{ visibility: "visible" }}>
               <AnswerButtonGroup
                 options={questionData.options}
-                correctAnswerIndex={correctAnswerIndex}
-                onAnswerClick={onAnswer}
+                correctAnswer={questionData.correctAnswer}
+                // correctAnswerIndex={correctAnswerIndex}
+                onAnswerClick={onAnswerClick}
                 isAnswered={isAnswered}
                 updateScore={() => updateScore()} // callback passed to AnswerButtonGroup then to AnswerButton
                 questionIndex={questionIndex}

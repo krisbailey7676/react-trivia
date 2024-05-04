@@ -2,23 +2,21 @@ import "../styles/AnswerButton.css";
 import { useState, useEffect } from "react";
 
 interface Props {
+  correctAnswer: string;
   onAnswerClick: () => void;
-  updateScore: () => void;
   isAnswered: boolean;
+  updateScore: () => void;
   questionIndex: number;
-  answerIndex: number;
   answer: string;
-  correctAnswerIndex: number;
 }
 
 function AnswerButton({
+  correctAnswer,
   onAnswerClick,
-  updateScore,
   isAnswered,
+  updateScore,
   questionIndex,
-  answerIndex,
   answer,
-  correctAnswerIndex,
 }: Props) {
   const [bgColor, setBgColor] = useState("purple");
 
@@ -28,7 +26,7 @@ function AnswerButton({
     setBgColor("purple");
   }, [questionIndex]);
 
-  const correct = answerIndex === correctAnswerIndex;
+  const correct = answer === correctAnswer;
   // const bgColor = isAnswered ? (correct ? "green" : "red") : "purple";
 
   const handleClick = () => {

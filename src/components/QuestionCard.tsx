@@ -20,6 +20,8 @@ function QuestionCard() {
     Math.floor(Math.random() * 4)
   );
 
+  console.log("Answered? :" + isAnswered);
+
   const firstQuestion = questionIndex === 0;
   const lastQuestion = questionIndex === breedNameArr.length - 1;
 
@@ -31,9 +33,6 @@ function QuestionCard() {
   ];
 
   function shuffleOptions(options: string[]) {
-    console.log("Called shuffled options");
-    console.log("Random Index: " + randomAnswerIndex);
-    console.log("Question Index: " + questionIndex);
     const shuffled = [];
     let position = 0;
 
@@ -69,6 +68,7 @@ function QuestionCard() {
 
   const decrementQuestionIndex = () => {
     setquestionIndex(questionIndex - 1);
+    setIsAnswered(false);
   };
 
   const resetQuestionIndex = () => {

@@ -63,7 +63,7 @@ function QuestionCard() {
     if (lastQuestion) {
       setTimeout(() => {
         setIsEnd(true);
-      }, 2000);
+      }, 1000);
     }
   };
 

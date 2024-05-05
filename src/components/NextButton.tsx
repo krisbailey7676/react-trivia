@@ -6,7 +6,7 @@ interface Props {
 function NextButton({ disabled, onClick }: Props) {
   return (
     <>
-      <button disabled={disabled} id="next" onClick={onClick}>
+      <button disabled={disabled} onClick={onClick}>
         Next &gt;&gt;&gt;
       </button>
     </>

@@ -1,16 +1,13 @@
 interface Props {
-  disabled: boolean;
   onClick: () => void;
 }
 
-function PreviousButton({ disabled, onClick }: Props) {
+function ResetButton({ onClick }: Props) {
   return (
     <>
-      <button disabled={disabled} id="prev" onClick={onClick}>
-        Play Again
-      </button>
+      <button onClick={onClick}>Play Again</button>
     </>
   );
 }
 
-export default PreviousButton;
+export default ResetButton;

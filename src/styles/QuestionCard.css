@@ -1,28 +1,57 @@
 .card {
     width: 30rem;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     --bs-border-width: none;
 }
 
-@media screen and (max-width: 300px) {
-    .card {
-      width: 25rem;
-    }
-  }
+.scoreBoard {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 80%;
+  height: 25rem;
+  border: solid black 1px;
+  text-align: center;
+  margin-top: 5rem;
+  padding: 2rem 1rem;
+  background-color: #ECDAEC;
+}
+
+#congrats, #scoreVerbiage{
+  font-size: 2rem;
+  color: #60308c;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#popper {
+  font-size: 5rem;
+}
+
+.scoreBoard button {
+  width: 9rem;
+  margin-top: 2rem;
+  background-color: purple;
+  color: white;
+  font-size: 1.5rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  border-radius: 12px;
+}
 
 .card-image {
     width: 100%;
-    height: 265px;
+    height: 17rem;
 }
 
 #ntbTextSection, #navSection {
     background-color: #ECDAEC;
     border: 1px solid #60308c;
+    padding: .5rem
 }
 
 #answerButtonSection {
     border-right: 1px solid #60308c;
     border-left: 1px solid #60308c;
+    padding: .5rem;
 }
 
 .card-text {
@@ -45,31 +74,6 @@ span {
     text-align: center;
 }
 
-/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
-@media screen and (max-width: 500px) {
-    span {
-      font-size: large;
-    }
-  }
-
-@media screen and (max-width: 500px) {
-    #score {
-      font-size: medium;
-    }
-  }
-
-@media screen and (max-width: 355px) {
-    span {
-      font-size: medium;
-    }
-  }
-
-@media screen and (max-width: 355px) {
-    #score {
-      font-size: small;
-    }
-  }
-
 #navSection button:disabled {
     border: none;
     background-color: #ECDAEC;
@@ -90,21 +94,59 @@ span {
 }
 
 @media screen and (max-width: 500px) {
-    #navSection button:not(:disabled), #navSection button:disabled {
-      font-size: medium;
-      width: 7rem;
-    }
+  span {
+    font-size: large;
   }
 
-  @media screen and (max-width: 400px) {
-    #navSection button:not(:disabled), #navSection button:disabled {
-      font-size: small;
-      width: 5.7rem;
-      padding-inline-end: 4px;
-      padding-inline-start: 4px;
-    }
+  #score {
+    font-size: medium;
   }
 
-#ntbTextSection, #answerButtonSection, #navSection {
-    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+  #navSection button:not(:disabled), #navSection button:disabled {
+    font-size: medium;
+    width: 7rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  
+  #congrats, #scoreVerbiage{
+    font-size: 1.5rem;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 12rem;}
+
+  #navSection button:not(:disabled), #navSection button:disabled {
+    font-size: small;
+    width: 5.7rem;
+    padding-inline-end: 4px;
+    padding-inline-start: 4px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  span {
+    font-size: medium;
+  }
+  #score span {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .card {
+    width: 25rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .card-body {
+    --bs-card-spacer-y: 0.25rem;
+    --bs-card-spacer-x: 0.25rem;
+  }
+  #congrats, #scoreVerbiage{
+    font-size: 1.2rem;
+  }
 }

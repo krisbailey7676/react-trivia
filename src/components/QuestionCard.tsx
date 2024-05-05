@@ -14,11 +14,12 @@ import {
 
 function QuestionCard() {
   const [questionIndex, setquestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [isAnswered, setIsAnswered] = useState(false);
   const [randomAnswerIndex, setRandomAnswerIndex] = useState(
     Math.floor(Math.random() * 4)
   );
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [score, setScore] = useState(0);
+  const [isEnd, setIsEnd] = useState(false);
 
   console.log("Answered? :" + isAnswered);
 
@@ -58,6 +59,12 @@ function QuestionCard() {
     if (isCorrect) {
       setScore(score + 1);
     }
+
+    if (lastQuestion) {
+      setTimeout(() => {
+        setIsEnd(true);
+      }, 2000);
+    }
   };
 
   const incrementQuestionIndex = () => {
@@ -75,23 +82,33 @@ function QuestionCard() {
     setquestionIndex(0);
     setScore(0);
     setIsAnswered(false);
+    setIsEnd(false);
   };
 
   return (
     <div className="card">
-      <div className="card-body">
-        <img
-          className="card-image"
-          src={questionData.img}
-          alt={`Picture of ${questionData.correctAnswer}`}
-        />
-        <div className="text-center" id="ntbTextSection">
-          <p className="card-text">
-            What is the name of the dog breed pictured above?
-          </p>
+      {isEnd ? (
+        <div className="scoreBoard">
+          <div id="congrats">Congratulations!!</div>
+          <div id="popper">🎉</div>
+          <div id="scoreVerbiage">You Scored: {score}/20</div>
+          <div>
+            <ResetButton onClick={() => resetQuestionIndex()} />
+          </div>
         </div>
-        <div id="answerButtonSection">
-          <div style={{ visibility: "visible" }}>
+      ) : (
+        <div className="card-body">
+          <img
+            className="card-image"
+            src={questionData.img}
+            alt={`Picture of ${questionData.correctAnswer}`}
+          />
+          <div className="text-center" id="ntbTextSection">
+            <p className="card-text">
+              What is the name of the dog breed pictured above?
+            </p>
+          </div>
+          <div id="answerButtonSection">
             <AnswerButtonGroup
               options={questionData.options}
               correctAnswer={questionData.correctAnswer}
@@ -100,37 +117,32 @@ function QuestionCard() {
               questionIndex={questionIndex}
             />
           </div>
-        </div>
 
-        <div
-          className="d-flex justify-content-between flex-row align-items-center"
-          id="navSection"
-        >
-          <div className="d-flex flex-column">
-            <PreviousButton
-              disabled={firstQuestion || lastQuestion}
-              onClick={() => decrementQuestionIndex()}
-            />
-          </div>
-          <div id="midCol" className="d-flex flex-column">
-            <span>Question #{questionIndex + 1}</span>
-            <div id="score">🐶Score {score}/20🐶</div>
-          </div>
-          <div className="d-flex flex-column">
-            {!lastQuestion ? (
+          <div
+            className="d-flex justify-content-between flex-row align-items-center"
+            id="navSection"
+          >
+            <div className="d-flex flex-column">
+              <PreviousButton
+                disabled={firstQuestion || lastQuestion}
+                onClick={() => decrementQuestionIndex()}
+              />
+            </div>
+            <div id="midCol" className="d-flex flex-column">
+              <span>Question #{questionIndex + 1}</span>
+              <div id="score">
+                <span>🐶</span>Score {score}/20<span>🐶</span>
+              </div>
+            </div>
+            <div className="d-flex flex-column">
               <NextButton
                 disabled={lastQuestion}
                 onClick={() => incrementQuestionIndex()}
               />
-            ) : (
-              <ResetButton
-                disabled={!lastQuestion}
-                onClick={() => resetQuestionIndex()}
-              />
-            )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

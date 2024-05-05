@@ -108,19 +108,15 @@ span {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 425px) {
   
   #congrats, #scoreVerbiage{
     font-size: 1.5rem;
   }
 
-  .card-image {
-    width: 100%;
-    height: 12rem;}
-
   #navSection button:not(:disabled), #navSection button:disabled {
     font-size: small;
-    width: 5.7rem;
+    width: 5.5rem;
     padding-inline-end: 4px;
     padding-inline-start: 4px;
   }
@@ -142,10 +138,6 @@ span {
 }
 
 @media screen and (max-width: 350px) {
-  .card-body {
-    --bs-card-spacer-y: 0.25rem;
-    --bs-card-spacer-x: 0.25rem;
-  }
   #congrats, #scoreVerbiage{
     font-size: 1.2rem;
   }
